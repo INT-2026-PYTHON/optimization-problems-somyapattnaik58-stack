@@ -83,3 +83,30 @@ element, giving an overall O(n) algorithm.
 =================================================
 
 """
+def first_repeating_brute(nums):
+    n = len(nums)
+    min_second_occurrence_idx = float('inf')
+    result = -1
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums[i] == nums[j]:
+                if j < min_second_occurrence_idx:
+                    min_second_occurrence_idx = j
+                    result = nums[i]
+                break
+    return result
+
+def first_repeating_fast(nums):
+    seen=set()
+    for num in nums:
+        if num in seen:
+            return num
+        seen.add(num)
+    return -1
+
+user_input_nums=input("enter the list \n")
+nums=list(map(int,[s.strip() for s in user_input_nums.split(',')]))
+brute_result=first_repeating_brute(nums)
+fast_result=first_repeating_fast(nums)
+print(brute_result)
+print(fast_result)

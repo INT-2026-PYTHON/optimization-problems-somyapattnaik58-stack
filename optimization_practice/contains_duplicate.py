@@ -63,3 +63,25 @@ Optimized:   False  # O(n)
 =================================================
 
 """
+def has_duplicate_brute(nums):
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums[i] == nums[j]:
+                return True
+    return False
+
+def has_duplicate_fast(nums):
+    seen = set()
+    for num in nums:
+        if num in seen:
+            return True
+        seen.add(num)
+    return False
+
+user_input = input("enter the nums list \n")
+nums = list(map(int, user_input.split(',')))
+brute_result = has_duplicate_brute(nums)
+fast_result = has_duplicate_fast(nums)
+print(brute_result)
+print(fast_result)
