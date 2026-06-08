@@ -87,3 +87,33 @@ O(1) time, giving an overall O(n) algorithm.
 =================================================
 
 """
+def two_sum_brute(nums, target):
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums[i] + nums[j] == target:
+                return (i, j)
+    return None
+
+def two_sum_fast(nums, target):
+    num_map = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return (num_map[complement], i)
+        num_map[num] = i
+    return None
+
+user_input_nums = input("Enter the list of numbers (comma-separated): ")
+nums = list(map(int, [s.strip() for s in user_input_nums.split(',')]))
+
+user_input_target = input("Enter the target integer: ")
+target = int(user_input_target)
+
+brute_result = two_sum_brute(nums, target)
+fast_result = two_sum_fast(nums, target)
+
+print(f"Brute-force result: {brute_result}")
+print(f"Brute-force time complexity: O(n^2)")
+print(f"Optimized result: {fast_result}")
+print(f"Optimized time complexity: O(n)")
