@@ -91,3 +91,33 @@ the overall algorithm runs in O(n).
 =================================================
 
 """
+def count_pairs_brute(nums, target):
+    count = 0
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums[i] + nums[j] == target:
+                count += 1
+    return count
+
+def count_pairs_fast(nums, target):
+    count = 0
+    freq = {}
+    for x in nums:
+        complement = target - x
+        if complement in freq:
+            count += freq[complement]
+        freq[x] = freq.get(x, 0) + 1
+    return count
+
+user_input_nums = input("Enter the list of numbers (comma-separated):\n")
+user_input_target = input("Enter the target integer:\n")
+
+nums = list(map(int, [s.strip() for s in user_input_nums.split(',')]))
+target = int(user_input_target)
+
+brute_count = count_pairs_brute(nums, target)
+fast_count = count_pairs_fast(nums, target)
+
+print(brute_count)
+print(fast_count)
